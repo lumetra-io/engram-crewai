@@ -63,12 +63,7 @@ Both agents now have:
 
 ## Verified
 
-Smoke-tested against live `api.lumetra.io` with three stored facts and a synthesized query:
-
-> Q: "What does Lumetra make and who runs it?"
-> A: "Lumetra makes Engram (a memory MCP for AI agents). Jacob runs it."
-
-3 memories stored, 2 retrieved, answer cites both via Engram's explanation trace.
+Smoke-tested against live `api.lumetra.io` — three facts stored to a shared bucket via the `engram_store_memory` tool, then a `engram_query_memory` call asked a question whose answer required combining two of them. Engram returned a single synthesized answer that fused both source memories, and the explanation trace cited each.
 
 ## License
 
