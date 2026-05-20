@@ -2,7 +2,7 @@
 
 [CrewAI](https://github.com/crewAIInc/crewAI) integration for [Engram](https://lumetra.io) — durable shared memory for multi-agent crews.
 
-Returns two CrewAI Tools (`engram_store_memory`, `engram_query_memory`) bound to a single Engram bucket that every agent in the crew can read from and write to. The crew's accumulated knowledge survives across runs, processes, and machines.
+Returns two CrewAI `BaseTool` instances (`engram_store_memory`, `engram_query_memory`) bound to a single Engram bucket that every agent in the crew can read from and write to. The crew's accumulated knowledge survives across runs, processes, and machines.
 
 ## Install
 
@@ -55,7 +55,7 @@ Both agents now have:
 
 ## Why this beats CrewAI's built-in memory
 
-- **Persists across runs.** CrewAI's built-in memory is per-process; the next `kickoff()` starts blank. Engram doesn't.
+- **Multi-tenant and cross-machine by default.** CrewAI's built-in memory (`memory=True`) persists locally to ChromaDB + SQLite under `./.crewai/memory`, but it's tied to that machine's disk and has no tenant isolation. Engram is a hosted service with per-bucket scoping, so the same crew can run on a laptop today, a CI runner tomorrow, and a fleet of workers next week against one shared memory layer.
 - **Shared across agents in the crew.** Engram is the team's institutional memory, not a per-agent scratchpad.
 - **Hybrid retrieval** — BM25 + vector + knowledge graph fusion, not vector-only.
 - **Bring-your-own-LLM** for extraction and synthesis (<https://lumetra.io/models>).
